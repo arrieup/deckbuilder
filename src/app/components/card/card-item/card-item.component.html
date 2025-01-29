@@ -1,0 +1,13 @@
+<ion-card>
+  <img alt="Splash art" src={{card.image}} class="card-img"/>
+  <ion-card-header>
+    <ion-card-title>{{card.name}}</ion-card-title>
+    <ion-card-subtitle>{{card.descriptor}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Here's a small text description for the card content. Nothing more, nothing less.
+  </ion-card-content>
+  <ion-button expand="block" (click)="openEditModal(card)">Edit</ion-button>
+  
+</ion-card>

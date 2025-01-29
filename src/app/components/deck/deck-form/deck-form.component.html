@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Deck' : 'Create Deck' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Deck Name</ion-label>
+      <ion-input formControlName="name" placeholder="Enter deck name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descriptor</ion-label>
+      <ion-textarea formControlName="descriptor" placeholder="Describe your deck"></ion-textarea>
+    </ion-item>
+
+    <h2>Available Cards</h2>
+    <ion-list>
+      <ion-item *ngFor="let card of availableCards">
+        <ion-label>{{ card.name }}</ion-label>
+        <ion-button (click)="addCard(card.id)" color="primary">Add</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <h2>Deck Cards</h2>
+    <ion-list>
+      <ion-item *ngFor="let cardId of deck.cards">
+        <ion-thumbnail slot="start">
+          <img [src]="getCardById(cardId)?.image || 'https://ionicframework.com/docs/img/demos/card-media.png'" alt="Card Image" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ getCardById(cardId)?.name || 'Unknown Card' }}</h2>
+          <p>{{ getCardById(cardId)?.descriptor || 'No description' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" [disabled]="deckForm.invalid">
+      {{ isEditMode ? 'Update Deck' : 'Create Deck' }}
+    </ion-button>
+  </form>
+</ion-content>

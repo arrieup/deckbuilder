@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Card' : 'Create Card' }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button/>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input formControlName="name" placeholder="Enter card name"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="cardForm.controls['name'].invalid && cardForm.controls['name'].touched">
+      <ion-text color="danger">
+        <p *ngIf="cardForm.controls['name'].hasError('required')">Name is required.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descriptor</ion-label>
+      <ion-textarea formControlName="descriptor" placeholder="Enter card descriptor"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="cardForm.controls['descriptor'].invalid && cardForm.controls['descriptor'].touched">
+      <ion-text color="danger">
+        <p *ngIf="cardForm.controls['descriptor'].hasError('required')">Descriptor is required.</p>
+        <p *ngIf="cardForm.controls['descriptor'].hasError('minlength')">Descriptor must be at least 10 characters.</p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Image</ion-label>
+      <ion-input (change)="onImageChange($event)" formControlName="image" />
+    </ion-item>
+    <ion-item *ngIf="cardForm.controls['image'].invalid && cardForm.controls['image'].touched">
+      <ion-text color="danger">
+        <p *ngIf="cardForm.controls['image'].hasError('pattern')">Please enter a valid URL for the image.</p>
+      </ion-text>
+    </ion-item>
+
+    <img [src]="previewImage" alt="Card Image" />
+
+    <ion-button expand="block" type="submit" [disabled]="cardForm.invalid">
+      {{ isEditMode ? 'Update Card' : 'Create Card' }}
+    </ion-button>
+  </form>
+</ion-content>
