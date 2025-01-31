@@ -1,21 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { NgIf, NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
 import { Deck } from 'src/app/models/deck.model';
 import { Card } from 'src/app/models/card.model';
 import { CARDS, DECKS } from 'src/app/repository';
-import { CardComponent } from '../../card/card-item/card-item.component';
 import { DeckDetailsComponent } from '../deck-details/deck-details.component';
 import { DeckFormComponent } from '../deck-form/deck-form.component';
 
 @Component({
-  selector: 'app-deck',
+  selector: 'app-deck-item',
   templateUrl: './deck-item.component.html',
   styleUrls: ['./deck-item.component.scss'],
-  imports: [IonicModule,
-  ],
+  imports: [IonicModule],
   standalone: true,
 })
 export class DeckComponent implements OnInit {

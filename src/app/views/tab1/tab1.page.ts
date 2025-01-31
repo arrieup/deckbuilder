@@ -14,6 +14,7 @@ import { DeckDetailsComponent } from 'src/app/components/deck/deck-details/deck-
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   imports: [IonicModule,DeckComponent, NgFor],
+  standalone:true
 })
 export class Tab1Page {
   decks : Deck[] = [];
